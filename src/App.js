@@ -85,7 +85,7 @@ function App() {
         reportStatus("Done.");
         listFiles();
       } else {
-        reportStatus("No files selected.");
+        reportStatus("No files selected");
       }
     } catch (error) {
       reportStatus(error.message);
