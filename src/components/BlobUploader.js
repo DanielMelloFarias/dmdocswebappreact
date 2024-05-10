@@ -17,25 +17,7 @@ const BlobUploader = () => {
     setStatus((prevStatus) => `${prevStatus}${message}<br/>`);
   };
 
-  const createContainer = async () => {
-    try {
-      reportStatus(`Creating container "${containerName}"...`);
-      await containerClient.create();
-      reportStatus(`Done. URL: ${containerClient.url}`);
-    } catch (error) {
-      reportStatus(error.message);
-    }
-  };
 
-  const deleteContainer = async () => {
-    try {
-      reportStatus(`Deleting container "${containerName}"...`);
-      await containerClient.delete();
-      reportStatus(`Done.`);
-    } catch (error) {
-      reportStatus(error.message);
-    }
-  };
 
   const uploadFiles = async (files) => {
     try {
@@ -75,26 +57,9 @@ const BlobUploader = () => {
     }
   };
 
-  const deleteFiles = async (selectedFiles) => {
-    try {
-      if (selectedFiles.length > 0) {
-        reportStatus("Deleting files...");
-        for (const file of selectedFiles) {
-          await containerClient.deleteBlob(file);
-        }
-        reportStatus("Done.");
-        listFiles();
-      } else {
-        reportStatus("No files selected.");
-      }
-    } catch (error) {
-      reportStatus(error.message);
-    }
-  };
-
   return (
     <div>
-      <button onClick={createContainer}>Create container</button>
+
       <button onClick={() => fileInputRef.current.click()}>Select and upload files</button>
       <input
         type="file"
@@ -104,8 +69,7 @@ const BlobUploader = () => {
         onChange={(e) => uploadFiles(e.target.files)}
       />
       <button onClick={listFiles}>List files</button>
-      <button onClick={() => deleteFiles(fileList.filter(file => file.selected))}>Delete selected files</button>
-      <button onClick={deleteContainer}>Delete container</button>
+            
       <p><b>Status:</b></p>
       <p id="status" dangerouslySetInnerHTML={{ __html: status }} style={{ height: "160px", width: "593px", overflow: "scroll" }} />
       <p><b>Files:</b></p>
