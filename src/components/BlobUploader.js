@@ -93,7 +93,11 @@ const BlobUploader = () => {
 
   return (
     <div>
+      
+       {/* 
       <button onClick={createContainer}>Create container</button>
+      */}
+
       <button onClick={() => fileInputRef.current.click()}>Select and upload files</button>
       <input
         type="file"
@@ -102,11 +106,21 @@ const BlobUploader = () => {
         multiple
         onChange={(e) => uploadFiles(e.target.files)}
       />
+        
+
+
       <button onClick={listFiles}>List files</button>
+
+      {/*
       <button onClick={() => deleteFiles(fileList.filter(file => file.selected))}>Delete selected files</button>
+
       <button onClick={deleteContainer}>Delete container</button>
+      */}
+
       <p><b>Status:</b></p>
       <p id="status" dangerouslySetInnerHTML={{ __html: status }} style={{ height: "160px", width: "593px", overflow: "scroll" }} />
+
+
       <p><b>Files:</b></p>
       <select
         id="file-list"
