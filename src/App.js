@@ -1,8 +1,14 @@
-import React from 'react';
+// src/App.js
+import React from "react";
+import BlobUploader from "./components/BlobUploader";
 
 function App() {
-  const value = 'World';
-  return <div>Hello {value}</div>;
+  return (
+    <div>
+      <h1>Azure Blob Storage File Uploader</h1>
+      <BlobUploader />
+    </div>
+  );
 }
 
 export default App;
