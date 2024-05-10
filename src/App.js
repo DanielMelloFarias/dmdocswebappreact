@@ -29,7 +29,7 @@ function App() {
 
   const deleteContainer = async () => {
     try {
-      reportStatus(`Deleting container "${containerName}"...`);
+      reportStatus(`Deleting container... "${containerName}"...`);
       await containerClient.delete();
       reportStatus("Done.");
     } catch (error) {
