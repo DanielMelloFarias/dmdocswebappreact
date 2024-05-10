@@ -17,15 +17,12 @@ jobs:
     steps:
       - name: Checkout code
         uses: actions/checkout@v3
-        with:
-          submodules: true
-          lfs: false
-      - name: Clean Git extraheader
-        run: git config --global --unset-all http.https://github.com/.extraheader || true
       - name: Set up Node.js
         uses: actions/setup-node@v3
         with:
           node-version: '20'
+      - name: Clean Git extraheader
+        run: git config --global --unset-all http.https://github.com/.extraheader || true
       - name: Install dependencies
         run: npm install
       - name: Build And Deploy
@@ -49,12 +46,12 @@ jobs:
     steps:
       - name: Checkout code
         uses: actions/checkout@v3
-      - name: Clean Git extraheader
-        run: git config --global --unset-all http.https://github.com/.extraheader || true
       - name: Set up Node.js
         uses: actions/setup-node@v3
         with:
           node-version: '20'
+      - name: Clean Git extraheader
+        run: git config --global --unset-all http.https://github.com/.extraheader || true
       - name: Close Pull Request
         id: closepullrequest
         uses: Azure/static-web-apps-deploy@v1
