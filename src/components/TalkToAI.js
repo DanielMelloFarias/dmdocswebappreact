@@ -58,7 +58,7 @@ const TalkToDocuments = () => {
 
   return (
     <div style={{ padding: "20px", fontFamily: "Arial, sans-serif" }}>
-      <h2 style={{ color: "#333" }}>Talk to Documents</h2>
+      <h2 style={{ color: "#333" }}>Talk to AI - ChatGPT 4 Geral</h2>
       <form onSubmit={handleFormSubmit} style={{ marginBottom: "20px" }}>
         <input
           type="text"

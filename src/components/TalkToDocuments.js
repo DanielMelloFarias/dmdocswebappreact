@@ -7,9 +7,14 @@ const TalkToDocuments = () => {
   const [response, setResponse] = useState("");
   const [isLoading, setIsLoading] = useState(false);
 
-  const apiBase = "https://peplink.openai.azure.com/openai/deployments/";
+  const endpoint = "https://peplink.openai.azure.com"; // Ensure this is your correct base URL
   const apiKey = "34b2484413db4eedbc9f0d967f71d249";
-  const deploymentId = "Gpt4";
+  const deployment = "Gpt4";
+
+  const searchEndpoint = "https://iadevopssearch.search.windows.net";
+  const searchTextP1 = "cmXWzroMX0R0VWV2jU1FvZ8jjRv";
+  const searchTextP2 = "3JTNB8sZTDtmYiQAzSeCAfjtI";
+  const searchIndexName = "iadmdocs";
 
   const handleQuestionChange = (e) => {
     setQuestion(e.target.value);
@@ -21,24 +26,33 @@ const TalkToDocuments = () => {
     setResponse("");
     try {
       const result = await axios.post(
-        `${apiBase}${deploymentId}/chat/completions?api-version=2024-02-15-preview`,
+        `${endpoint}/openai/deployments/${deployment}/extensions/chat/completions?api-version=2023-08-01-preview`,
         {
           messages: [
-            {
-              role: "system",
-              content: "You are an AI assistant that helps people find information.",
-            },
             {
               role: "user",
               content: question,
             },
+            {
+              role: "system",
+              content: "You are an AI assistant that helps people find information.",
+            }
           ],
-          max_tokens: 800,
-          temperature: 0,
-          frequency_penalty: 0,
-          presence_penalty: 0,
-          top_p: 1,
-          stop: null,
+          dataSources: [
+            {
+              type: "AzureCognitiveSearch",
+              parameters: {
+                endpoint: searchEndpoint,
+                key: searchTextP1+searchTextP2,
+                indexName: searchIndexName,
+                inScope: false
+              }
+            }
+          ],
+          max_tokens: 500,
+          temperature: 0.7,
+          top_p: 0.95,
+          stream: false
         },
         {
           headers: {
@@ -47,7 +61,27 @@ const TalkToDocuments = () => {
           },
         }
       );
-      setResponse(result.data.choices[0].message.content);
+
+      // Process the response to extract content and references
+      const messages = result.data.choices[0].message.content;
+      const contextMessages = result.data.choices[0].message.context?.messages || [];
+      let references = "";
+      console.log ("Resposta: ", result);
+
+      contextMessages.forEach(message => {
+        if (message.role === "tool") {
+          try {
+            const contentObj = JSON.parse(message.content);
+            contentObj.citations.forEach(citation => {
+              references += `Title: ${citation.title}\nURL: ${citation.url}\n\n`;
+            });
+          } catch (error) {
+            console.error("Error parsing JSON:", error);
+          }
+        }
+      });
+
+      setResponse(`Content:\n${messages}\n\nReferences:\n${references}`);
     } catch (error) {
       console.error("Error calling the API:", error);
       setResponse("There was an error processing your request.");
@@ -58,15 +92,15 @@ const TalkToDocuments = () => {
 
   return (
     <div style={{ padding: "20px", fontFamily: "Arial, sans-serif" }}>
-      <h2 style={{ color: "#333" }}>Talk to Documents</h2>
+      <h2 style={{ color: "#333" }}>Talk to Documents - Converse com os Documentos</h2>
       <form onSubmit={handleFormSubmit} style={{ marginBottom: "20px" }}>
         <input
           type="text"
           value={question}
           onChange={handleQuestionChange}
-          placeholder="Ask your question here"
+          placeholder="Faça sua pergunta aqui..."
           style={{
-            width: "300px",
+            width: "450px",
             padding: "10px",
             fontSize: "14px",
             marginRight: "10px",
@@ -99,7 +133,7 @@ const TalkToDocuments = () => {
             readOnly
             style={{
               width: "100%",
-              height: "150px",
+              height: "200px",
               padding: "10px",
               fontSize: "14px",
               borderRadius: "4px",
