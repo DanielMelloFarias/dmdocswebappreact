@@ -2,7 +2,8 @@
 import React from "react";
 import { Routes, Route } from "react-router-dom";
 import BlobUploader from "./components/BlobUploader";
-import TalkToDocuments from "./components/TalkToDocuments"; // Vamos criar esse componente depois
+import TalkToIA from "./components/TalkToIA"; 
+import TalkToDocuments from "./components/TalkToDocuments"; 
 
 function App() {
   return (
@@ -11,6 +12,7 @@ function App() {
       <Routes>
         <Route path="/uploadFiles" element={<BlobUploader />} />
         <Route path="/talkToDocuments" element={<TalkToDocuments />} />
+        <Route path="/TalkToIA" element={<TalkToIA />} />
       </Routes>
     </div>
   );
