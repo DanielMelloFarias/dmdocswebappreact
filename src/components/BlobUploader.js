@@ -14,6 +14,8 @@ console.log ("TESTE");
 console.log ("Blob: ", blobSasUrl2);
 console.log ("Container: ", containerName2);
 
+console.log ("Blob: ", process.env.production.REACT_APP_BLOB_CONTAINER_NAME);
+
 const BlobUploader = () => {
   const [status, setStatus] = useState("");
   const [fileList, setFileList] = useState([]);
