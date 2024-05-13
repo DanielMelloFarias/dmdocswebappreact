@@ -2,7 +2,7 @@
 import React, { useState, useRef } from "react";
 import { BlobServiceClient } from "@azure/storage-blob";
 
-const blobSasUrl = "https://iadmdocs.blob.core.windows.net/?sv=2022-11-02&ss=bfqt&srt=sco&sp=rwdlacupiytfx&se=2024-05-11T02:06:28Z&st=2024-05-07T18:06:28Z&spr=https&sig=GiOMak%2FWR61vni8Zqp0z%2BYjCgdOIa3GIAWSRO9Ksk4Y%3D";
+const blobSasUrl = "https://iadmdocs.blob.core.windows.net/;QueueEndpoint=https://iadmdocs.queue.core.windows.net/;FileEndpoint=https://iadmdocs.file.core.windows.net/;TableEndpoint=https://iadmdocs.table.core.windows.net/;SharedAccessSignature=sv=2022-11-02&ss=bfqt&srt=sco&sp=rwdlacupiytfx&se=2024-05-22T18:47:29Z&st=2024-05-13T10:47:29Z&spr=https&sig=RlVe38lRsEWEr0Xlp3cXB2hVz%2BPFNov3M9EgTk8GKdk%3D";
 const blobServiceClient = new BlobServiceClient(blobSasUrl);
 const blobSasUrl2 = process.env.REACT_APP_BLOB_SAS_URL;
 
@@ -10,6 +10,7 @@ const containerName = "fileupload-iadmdocs";
 const containerClient = blobServiceClient.getContainerClient(containerName);
 const containerName2 = process.env.REACT_APP_BLOB_CONTAINER_NAME;
 
+console.log ("TESTE");
 console.log ("Blob: ", blobSasUrl2);
 console.log ("Container: ", containerName2);
 
