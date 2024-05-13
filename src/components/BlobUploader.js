@@ -15,6 +15,12 @@ console.log ("Blob: ", process.env.production.REACT_APP_BLOB_CONTAINER_NAME);
 console.log ("Blob2: ", env.production.REACT_APP_BLOB_CONTAINER_NAME);
 console.log ("Container: ", containerName2);
 
+console.log ("Secret1: ", secrets.REACT_APP_BLOB_CONTAINER_NAME);
+
+console.log("Container Name: ", process.env.REACT_APP_BLOB_CONTAINER_NAME);
+console.log("Container Name2: ", process.env.production.REACT_APP_BLOB_CONTAINER_NAME);
+console.log("Container Name3: ", env.production.REACT_APP_BLOB_CONTAINER_NAME);
+
 const BlobUploader = () => {
   const [status, setStatus] = useState("");
   const [fileList, setFileList] = useState([]);
