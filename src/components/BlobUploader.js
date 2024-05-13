@@ -12,7 +12,6 @@ const containerName2 = process.env.REACT_APP_BLOB_CONTAINER_NAME;
 
 console.log ("TESTE");
 
-console.log ("Blob: ", env.production.REACT_APP_BLOB_CONTAINER_NAME);
 console.log ("Secret1: ", secrets.REACT_APP_BLOB_CONTAINER_NAME);
 
 const BlobUploader = () => {
