@@ -2,7 +2,7 @@
 import React, { useState, useRef } from "react";
 import { BlobServiceClient } from "@azure/storage-blob";
 
-const blobSasUrl = "https://iadmdocs.blob.core.windows.net/;QueueEndpoint=https://iadmdocs.queue.core.windows.net/;FileEndpoint=https://iadmdocs.file.core.windows.net/;TableEndpoint=https://iadmdocs.table.core.windows.net/;SharedAccessSignature=sv=2022-11-02&ss=bfqt&srt=sco&sp=rwdlacupiytfx&se=2024-05-22T18:47:29Z&st=2024-05-13T10:47:29Z&spr=https&sig=RlVe38lRsEWEr0Xlp3cXB2hVz%2BPFNov3M9EgTk8GKdk%3D";
+const blobSasUrl = "https://iadmdocs.blob.core.windows.net/?sv=2022-11-02&ss=bf&srt=sco&sp=rwdlaciytfx&se=2024-05-20T19:14:43Z&st=2024-05-13T11:14:43Z&spr=https&sig=c320vukuHzAV7FzWyM7ZABTbLhwulk51lDV9l7TXDS4%3D";
 const blobServiceClient = new BlobServiceClient(blobSasUrl);
 const blobSasUrl2 = process.env.REACT_APP_BLOB_SAS_URL;
 
