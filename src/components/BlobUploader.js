@@ -11,10 +11,9 @@ const containerClient = blobServiceClient.getContainerClient(containerName);
 const containerName2 = process.env.REACT_APP_BLOB_CONTAINER_NAME;
 
 console.log ("TESTE");
-console.log ("Blob: ", blobSasUrl2);
-console.log ("Container: ", containerName2);
 
-console.log ("Blob: ", process.env.production.REACT_APP_BLOB_CONTAINER_NAME);
+console.log ("Blob: ", env.production.REACT_APP_BLOB_CONTAINER_NAME);
+console.log ("Secret1: ", secrets.REACT_APP_BLOB_CONTAINER_NAME);
 
 const BlobUploader = () => {
   const [status, setStatus] = useState("");
