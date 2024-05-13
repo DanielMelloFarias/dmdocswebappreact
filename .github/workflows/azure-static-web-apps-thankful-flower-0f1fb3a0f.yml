@@ -20,7 +20,7 @@ jobs:
       - name: Set up Node.js
         uses: actions/setup-node@v3
         with:
-          node-version: '20'  # Atualizando para Node.js 18
+          node-version: '20'  # Atualizando para Node.js 20
       - name: Clean Git extraheader
         run: git config --global --unset-all http.https://github.com/.extraheader || true
       - name: Install dependencies
@@ -49,7 +49,7 @@ jobs:
       - name: Set up Node.js
         uses: actions/setup-node@v3
         with:
-          node-version: '20'  # Atualizando para Node.js 18
+          node-version: '20'  # Atualizando para Node.js 20
       - name: Clean Git extraheader
         run: git config --global --unset-all http.https://github.com/.extraheader || true
       - name: Close Pull Request

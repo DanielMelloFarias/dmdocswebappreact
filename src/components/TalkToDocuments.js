@@ -81,7 +81,7 @@ const TalkToDocuments = () => {
         }
       });
 
-      setResponse(`Content:\n${messages}\n\nReferences:\n${references}`);
+      setResponse(`Resposta:\n${messages}\n\nReferências:\n${references}`);
     } catch (error) {
       console.error("Error calling the API:", error);
       setResponse("There was an error processing your request.");
