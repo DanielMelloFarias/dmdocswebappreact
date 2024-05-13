@@ -5,7 +5,7 @@ import BlobUploader from "./components/BlobUploader";
 function App() {
   return (
     <div>
-      <h1>Azure Blob Storage File Uploadir</h1>
+      <h1>Azure Blob Storage File Uploader</h1>
       <BlobUploader />
     </div>
   );
