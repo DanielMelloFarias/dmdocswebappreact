@@ -1,6 +1,7 @@
 // src/components/TalkToDocuments.js
 import React, { useState } from "react";
 import axios from "axios";
+import RespostaFeedback from "./RespostaFeedback";
 
 const TalkToDocuments = () => {
   const [question, setQuestion] = useState("");
@@ -142,6 +143,7 @@ const TalkToDocuments = () => {
               resize: "none",
             }}
           />
+          {response && <RespostaFeedback response={response} />}
         </div>
       )}
     </div>
