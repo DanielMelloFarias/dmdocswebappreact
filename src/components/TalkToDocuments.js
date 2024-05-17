@@ -2,6 +2,7 @@
 import React, { useState } from "react";
 import axios from "axios";
 import RespostaFeedback from "./RespostaFeedback";
+import SpeechToTextButton from "./SpeechToTextButton";
 
 const TalkToDocuments = () => {
   const [question, setQuestion] = useState("");
@@ -19,6 +20,10 @@ const TalkToDocuments = () => {
 
   const handleQuestionChange = (e) => {
     setQuestion(e.target.value);
+  };
+
+  const handleTranscribe = (transcription) => {
+    setQuestion(transcription);
   };
 
   const handleFormSubmit = async (e) => {
@@ -44,7 +49,7 @@ const TalkToDocuments = () => {
               type: "AzureCognitiveSearch",
               parameters: {
                 endpoint: searchEndpoint,
-                key: searchTextP1+searchTextP2,
+                key: searchTextP1 + searchTextP2,
                 indexName: searchIndexName,
                 inScope: false
               }
@@ -67,7 +72,7 @@ const TalkToDocuments = () => {
       const messages = result.data.choices[0].message.content;
       const contextMessages = result.data.choices[0].message.context?.messages || [];
       let references = "";
-      console.log ("Resposta: ", result);
+      console.log("Resposta: ", result);
 
       contextMessages.forEach(message => {
         if (message.role === "tool") {
@@ -95,34 +100,41 @@ const TalkToDocuments = () => {
     <div style={{ padding: "20px", fontFamily: "Arial, sans-serif" }}>
       <h2 style={{ color: "#333" }}>Talk to Documents - Converse com os Documentos</h2>
       <form onSubmit={handleFormSubmit} style={{ marginBottom: "20px" }}>
-        <input
-          type="text"
+        <textarea
           value={question}
           onChange={handleQuestionChange}
           placeholder="Faça sua pergunta aqui..."
+          rows="3"
           style={{
             width: "450px",
+            height: "100px",
             padding: "10px",
             fontSize: "14px",
             marginRight: "10px",
             borderRadius: "4px",
             border: "1px solid #ccc",
+            resize: "vertical",
+            overflowY: "auto"
           }}
         />
-        <button
-          type="submit"
-          style={{
-            padding: "10px 20px",
-            fontSize: "14px",
-            color: "#fff",
-            backgroundColor: "#007bff",
-            border: "none",
-            borderRadius: "4px",
-            cursor: "pointer",
-          }}
-        >
-          Submit
-        </button>
+        <div style={{ display: "flex", alignItems: "center" }}>
+          <SpeechToTextButton onTranscribe={handleTranscribe} />
+          <button
+            type="submit"
+            style={{
+              padding: "10px 20px",
+              fontSize: "14px",
+              color: "#fff",
+              backgroundColor: "#007bff",
+              border: "none",
+              borderRadius: "4px",
+              cursor: "pointer",
+              marginLeft: "10px",
+            }}
+          >
+            Submit
+          </button>
+        </div>
       </form>
       {isLoading ? (
         <p style={{ color: "#007bff" }}>Processing...</p>
@@ -141,6 +153,7 @@ const TalkToDocuments = () => {
               border: "1px solid #ccc",
               backgroundColor: "#f9f9f9",
               resize: "none",
+              overflowY: "auto"
             }}
           />
           {response && <RespostaFeedback response={response} />}
