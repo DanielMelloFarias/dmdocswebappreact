@@ -5,6 +5,7 @@ import Home from "./components/Home";
 import BlobUploader from "./components/BlobUploader";
 import TalkToDocuments from "./components/TalkToDocuments";
 import TalkToAI from "./components/TalkToAI";
+import SpeechToText from "./components/SpeechToText"; // Importar o novo componente
 
 const App = () => {
   return (
@@ -50,13 +51,24 @@ const App = () => {
         >
           Use o ChatGPT 4 - Geral |
         </NavLink>
+        <NavLink
+          to="/speechToText" // Adicionar novo link de navegação
+          style={({ isActive }) => ({
+            marginRight: "30px",
+            color: isActive ? "yellow" : "white",
+            textDecoration: "none"
+          })}
+        >
+          Speech to Text
+        </NavLink>
       </nav>
       <div style={{ padding: "20px" }}>
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/uploadFiles" element={<BlobUploader />} />
           <Route path="/talkToDocuments" element={<TalkToDocuments />} />
-          <Route path="/talkToAI" element={<TalkToAI/>} />
+          <Route path="/talkToAI" element={<TalkToAI />} />
+          <Route path="/speechToText" element={<SpeechToText />} /> {/* Adicionar nova rota */}
         </Routes>
       </div>
     </div>

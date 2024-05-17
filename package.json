@@ -10,6 +10,7 @@
     "@testing-library/react": "^9.3.2",
     "@testing-library/user-event": "^7.1.2",
     "axios": "^1.6.8",
+    "microsoft-cognitiveservices-speech-sdk": "^1.36.0",
     "parcel": "^2.12.0",
     "react": "^16.14.0",
     "react-dom": "^16.14.0",
